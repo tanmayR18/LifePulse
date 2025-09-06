@@ -2,6 +2,7 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 import React, { FC, useEffect, useRef } from 'react';
 import { screenWidth } from '../../utils/Scaling';
 import { bigHero6Data } from '../../utils/data';
+import Water from '../options/Water';
 
 const BigHero6: FC<{ onPress: (type: string) => void }> = ({ onPress }) => {
   const animatedValues = useRef(
@@ -38,12 +39,18 @@ const BigHero6: FC<{ onPress: (type: string) => void }> = ({ onPress }) => {
         });
 
         return (
-          <Animated.View style={[styles.item, { transform: [{ translateX }, { translateY }] }]} key={index}>
-            <Text>anything</Text>
+          <Animated.View
+            style={[
+              styles.item,
+              { transform: [{ translateX }, { translateY }] },
+            ]}
+            key={index}
+          >
+            {item === 'water' ? <Water /> : <Text>anything</Text>}
           </Animated.View>
         );
       })}
-    </View>    
+    </View>
   );
 };
 
@@ -60,7 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    zIndex: 20
+    zIndex: 20,
   },
   item: {
     position: 'absolute',
