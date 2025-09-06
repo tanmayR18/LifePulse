@@ -3,6 +3,7 @@ import React, { FC, useEffect, useRef } from 'react';
 import { screenWidth } from '../../utils/Scaling';
 import { bigHero6Data } from '../../utils/data';
 import Water from '../options/Water';
+import OptionItem from '../options/OptionItem';
 
 const BigHero6: FC<{ onPress: (type: string) => void }> = ({ onPress }) => {
   const animatedValues = useRef(
@@ -46,7 +47,8 @@ const BigHero6: FC<{ onPress: (type: string) => void }> = ({ onPress }) => {
             ]}
             key={index}
           >
-            {item === 'water' ? <Water /> : <Text>anything</Text>}
+            {item === 'water' && <Water />}
+            {item !== 'water' && <OptionItem onPress={onPress} item={item} />}
           </Animated.View>
         );
       })}

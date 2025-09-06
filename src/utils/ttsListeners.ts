@@ -22,3 +22,19 @@ export const initializeTtsListeners = async () => {
   Tts.addEventListener('tts-finish', event => console.log('finish', event));
   Tts.addEventListener('tts-cancel', event => console.log('cancel', event));
 };
+
+export const playTTS = async (message: string) => {
+  Tts.getInitStatus().then(
+    e => {
+      console.log('TTS is ready', e);
+    },
+    err => {
+      if (err.code === 'no_engine') {
+        console.log('NO ENGINE TTS');
+        Tts.requestInstallEngine();
+      }
+    },
+  );
+
+  Tts.speak(message);
+};

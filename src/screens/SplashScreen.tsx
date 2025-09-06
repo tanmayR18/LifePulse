@@ -11,9 +11,10 @@ import Animated, {
 import { Colors, Fonts, lightColors } from '../utils/Constants';
 import { screenHeight, screenWidth } from '../utils/Scaling';
 import CustomText from '../components/common/CustomText';
-import { initializeTtsListeners } from '../utils/ttsListeners';
+import { initializeTtsListeners, playTTS } from '../utils/ttsListeners';
 import Tts from 'react-native-tts';
 import { resetAndNavigate } from '../utils/NavigationUtils';
+import { playSound } from '../utils/VoiceUtils';
 
 const bottomColors = [...lightColors].reverse();
 
@@ -23,9 +24,10 @@ const SplashScreen: FC = () => {
 
   const launchAnimation = useCallback(async () => {
     messageContainerAnimation.value = screenHeight * 0.001;
+    playSound('ting2');
     setTimeout(() => {
       lifePulseAnimation.value = -screenHeight * 0.02;
-      Tts.speak('Welcome to Life Pulse');
+      playTTS('Welcome to Life Pulse');
     }, 600);
 
     setTimeout(() => {
