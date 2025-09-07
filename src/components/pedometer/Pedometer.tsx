@@ -19,7 +19,7 @@ import { playTTS } from '../../utils/ttsListeners';
 // import CircularProgress from 'react-native-circular-progress-indicator';
 import { Fonts } from '../../utils/Constants';
 import CustomText from '../common/CustomText';
-import CircularProgress from 'react-native-circular-progress-indicator';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const Pedometer: FC<{
   message: string;
@@ -70,51 +70,29 @@ const Pedometer: FC<{
         style={styles.logo}
       />
       <View style={styles.indicator}>
-        {/* <CircularProgress
-          value={stepCount}
-          maxValue={dailyGoal}
-          valueSuffix="/2000"
-          progressValueFontSize={22}
-          radius={120}
-          activeStrokeColor="#cdd27e"
-          inActiveStrokeColor="#4c6394"
-          inActiveStrokeOpacity={0.5}
-          inActiveStrokeWidth={20}
-          activeStrokeWidth={20}
-          title="Steps"
-          titleColor="#555"
-          titleFontSize={22}
-          titleStyle={{ fontFamily: Fonts.SemiBold }}
+        <AnimatedCircularProgress
+          size={200}
+          width={15}
+          fill={stepCount / 100 >= 100 ? 100 : stepCount / 100}
+          tintColor="#66BB6A"
+          onAnimationComplete={() => console.log('onAnimationComplete')}
+          backgroundColor="#C8E6C9"
+          lineCap="round"
+          style={{ marginHorizontal: 'auto' }}
         >
-          <CustomText
-            fontSize={RFValue(8)}
-            fontFamily={Fonts.SemiBold}
-            style={styles.text}
-          >
-            Start Walking, counter will update automatically.
-          </CustomText>
-        </CircularProgress> */}
-        {/* <CustomText
+          {() => (
+            <Text className=" text-black text-xl ">
+              {stepCount.toLocaleString('en-IN')} / 10,000
+            </Text>
+          )}
+        </AnimatedCircularProgress>
+        <CustomText
           fontSize={RFValue(8)}
           fontFamily={Fonts.SemiBold}
           style={styles.text}
         >
-          Start Walking, counter will update automatically. {stepCount}
-        </CustomText> */}
-        <CircularProgress
-          value={90}
-          valuePrefix={'$'}
-          inActiveStrokeColor={'#2ecc71'}
-          inActiveStrokeOpacity={0.2}
-        />
-
-        <CircularProgress
-          value={85}
-          inActiveStrokeColor={'#2ecc71'}
-          inActiveStrokeOpacity={0.2}
-          progressValueColor={'#fff'}
-          valueSuffix={'%'}
-        />
+          Start Walking, counter will update automatically.
+        </CustomText>
       </View>
     </View>
   );
@@ -145,6 +123,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: 'center',
     justifyContent: 'center',
+    marginHorizontal: 'auto',
   },
   logo: {
     width: 50,
