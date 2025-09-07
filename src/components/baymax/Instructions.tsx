@@ -3,31 +3,43 @@ import React, { FC } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import LottieView from 'lottie-react-native';
+import  Markdown  from 'react-native-markdown-display';
+import { Fonts } from '../../utils/Constants';
 
 const Instructions: FC<{
-    message: string;
-    onCross: () => void;
-}> = ({ message, onCross}) => {
+  message: string;
+  onCross: () => void;
+}> = ({ message, onCross }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onCross} style={styles.cross}>
         <Icon name="close-circle" color="red" size={RFValue(20)} />
       </TouchableOpacity>
-      <Image 
+      <Image
         source={require('../../assets/images/logo_short.png')}
         style={styles.logo}
       />
       <View>
-        {
-            message === 'meditation' ?
-            <LottieView 
-                source={require('../../assets/animations/breath.json')}
-                style={{ width: 400, height: 400, alignSelf: 'center' }}
-                autoPlay
-                loop
-            /> : 
-            <Text></Text>
-        }
+        {message === 'meditation' ? (
+          <LottieView
+            source={require('../../assets/animations/breath.json')}
+            style={{ width: 400, height: 400, alignSelf: 'center' }}
+            autoPlay
+            loop
+          />
+        ) : (
+          <Markdown
+            style={{
+              body: {
+                fontFamily: Fonts.Theme,
+                padding: 20,
+                fontSize: RFValue(22),
+              },
+            }}
+          >
+            {message}
+          </Markdown>
+        )}
       </View>
     </View>
   );
@@ -47,6 +59,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     shadowColor: '#000',
     borderRadius: 19,
+    zIndex: 20,
   },
   logo: {
     width: 50,

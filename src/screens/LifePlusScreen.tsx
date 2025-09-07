@@ -10,6 +10,7 @@ import { playSound } from '../utils/VoiceUtils.tsx';
 import { prompt } from '../utils/data.tsx';
 import Instructions from '../components/baymax/Instructions.tsx';
 import Pedometer from '../components/pedometer/Pedometer.tsx';
+import { askAI } from '../service/apiService.tsx';
 
 const LifePlusScreen = () => {
   const blurOpacity = useRef(new Animated.Value(0)).current;
@@ -59,6 +60,10 @@ const LifePlusScreen = () => {
         return;
       }
 
+      const data = await askAI(promptText)
+      setMessage(data)
+      playTTS(data)
+
       if (type === 'happiness') {
         setTimeout(() => {
           playSound(sound);
@@ -67,7 +72,6 @@ const LifePlusScreen = () => {
         playSound(sound);
       }
 
-      setMessage(type);
       unBlur();
     } catch (error: any) {
       handleError(error);
@@ -85,13 +89,13 @@ const LifePlusScreen = () => {
     }
 
     switch (type) {
-      case 'meditation':
+      case 'happiness':
         handleResponse(type, prompt.joke, 'laugh');
         break;
       case 'motivation':
         handleResponse(type, prompt.motivation, 'motivation');
         break;
-      case 'meditation':
+      case 'health':
         handleResponse(type, prompt.health, 'meditation');
         break;
       case 'meditation':
