@@ -17,7 +17,7 @@ export const usePedometerStore = create<PedometerStore>()(
   persist(
     (set, get) => ({
       stepCount: 0,
-      dailyGoal: 2000,
+      dailyGoal: 10000,
       distance: '',
       startDate: new Date().toISOString().split('T')[0],
       initializeStepsForTheDay: () => {

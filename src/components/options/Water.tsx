@@ -18,6 +18,9 @@ const Water = () => {
       playSound('ting');
       const timestamp = new Date().toISOString();
       addWaterIntake(timestamp);
+      setTimeout(() => {
+        playTTS('Good work! Stay Hydrated');
+      }, 1000);
     } else {
       playTTS('You have completed your daily water intake goal');
     }
