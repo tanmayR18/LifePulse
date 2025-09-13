@@ -149,7 +149,7 @@ const LifePlusScreen = () => {
         </View>
       )}
 
-      {/* {!showInstructions && <BigHero6 onPress={onOptionPressHandler} />} */}
+      {!showInstructions && <BigHero6 onPress={onOptionPressHandler} />}
       <Background blurOpacity={blurOpacity} />
     </View>
   );
