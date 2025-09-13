@@ -5,12 +5,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from '../screens/SplashScreen';
 import LifePlusScreen from '../screens/LifePlusScreen';
 import { navigationRef } from '../utils/NavigationUtils';
+import BootSplash from "react-native-bootsplash"
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
+
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer 
+    onReady={async () => await BootSplash.hide()}
+    ref={navigationRef}>
       <Stack.Navigator
         initialRouteName="SplashScreen"
         screenOptions={{
