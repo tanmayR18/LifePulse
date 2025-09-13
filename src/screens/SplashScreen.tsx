@@ -11,6 +11,10 @@ import Animated, {
 import { Colors, Fonts, lightColors } from '../utils/Constants';
 import { screenHeight, screenWidth } from '../utils/Scaling';
 import CustomText from '../components/common/CustomText';
+import { initializeTtsListeners, playTTS } from '../utils/ttsListeners';
+import Tts from 'react-native-tts';
+import { resetAndNavigate } from '../utils/NavigationUtils';
+import { playSound } from '../utils/VoiceUtils';
 
 const bottomColors = [...lightColors].reverse();
 
@@ -20,12 +24,19 @@ const SplashScreen: FC = () => {
 
   const launchAnimation = useCallback(async () => {
     messageContainerAnimation.value = screenHeight * 0.001;
+    playSound('ting2');
     setTimeout(() => {
-        lifePulseAnimation.value = -screenHeight * 0.02
+      lifePulseAnimation.value = -screenHeight * 0.02;
+      playTTS('Welcome to Life Pulse');
     }, 600);
+
+    setTimeout(() => {
+        resetAndNavigate('LifePlusScreen')
+    }, 4000);
   }, [messageContainerAnimation, lifePulseAnimation]);
 
   useEffect(() => {
+    initializeTtsListeners();
     launchAnimation();
   }, [launchAnimation]);
 
@@ -61,6 +72,7 @@ const SplashScreen: FC = () => {
       <Animated.View style={[styles.imageContainer, animateImageStyle]}>
         <Image
           style={styles.img}
+          resizeMode="contain"
           source={require('../assets/images/launch.png')}
         />
       </Animated.View>
@@ -95,5 +107,5 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: { backgroundColor: Colors.primary },
   imageContainer: { height: screenHeight * 0.5, width: screenWidth - 20 },
-  img: { width: '100%', height: '100%', resizeMode: 'contain' },
+  img: { width: '100%', height: '100%' },
 });
