@@ -27,7 +27,7 @@ const SplashScreen: FC = () => {
     playSound('ting2');
     setTimeout(() => {
       lifePulseAnimation.value = -screenHeight * 0.02;
-      playTTS('Welcome to Life Pulse');
+      playTTS('Welcome to baymax');
     }, 600);
 
     setTimeout(() => {
