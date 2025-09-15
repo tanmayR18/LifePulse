@@ -84,6 +84,7 @@ export const registeringAllTriggers = async () => {
   if (waterDrinkStamps.length !== 8) {
     await createHourlyReminders();
   } else {
+    // if daily drinking quota is over then cancel all the notification
     const notifications = await notifee.getTriggerNotifications();
     let counter = 1;
     for (const notification of notifications) {
