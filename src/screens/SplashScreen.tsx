@@ -84,7 +84,7 @@ const SplashScreen: FC = () => {
         <LinearGradient className=" pt-8 w-full h-full" colors={bottomColors}>
           <View className=" bg-white flex-1 rounded-[20px] p-5 items-center">
             <CustomText fontSize={34} fontFamily={Fonts.Theme}>
-              LifePulse
+              Baymax
             </CustomText>
             <LottieView
               source={require('../assets/animations/syncing.json')}
